@@ -1,11 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "./Movie.css";
 
 // since a Movie doesn't need a state, we can use a function component
 // instead of a class as in App.js
 function Movie({ id, year, title, summary, poster, genres }) {
     return (
+    <Link to={{
+        pathname: `/movies/${id}`,
+        state: {
+            year:year,
+            title:title,
+            summary:summary,
+            poster:poster,
+            genres:genres
+        }
+    }}>
     <div className="movie">
         <img src={poster} alt={title} title={title} />
         <div className="movie__data">
@@ -16,7 +27,8 @@ function Movie({ id, year, title, summary, poster, genres }) {
                 {genres.map((genre, index) => <li key={index} className="genres__genre">{genre}</li>)}
             </ul>
         </div>
-    </div>);
+    </div>
+    </Link>);
 }
 
 Movie.propTypes = {
