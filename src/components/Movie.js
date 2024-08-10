@@ -6,6 +6,8 @@ import "./Movie.css";
 // since a Movie doesn't need a state, we can use a function component
 // instead of a class as in App.js
 function Movie({ id, year, title, summary, poster, genres }) {
+    const htmlAttributes = { maxLength: '1000' };
+
     return (
     <Link to={{
         pathname: `/movies/${id}`,
@@ -22,7 +24,9 @@ function Movie({ id, year, title, summary, poster, genres }) {
         <div className="movie__data">
             <h3 className="movie__title">{title}</h3>
             <h5 className="movie__year">{year}</h5>
-            <p className="movie__summary">{summary}</p>
+            <p className="movie__summary">{summary.length > 250 ?
+                `${summary.substring(0, 250)}...` : summary
+            }</p>
             <ul className="genres">
                 {genres.map((genre, index) => <li key={index} className="genres__genre">{genre}</li>)}
             </ul>
